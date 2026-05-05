@@ -1,0 +1,52 @@
+declare const _default: [
+  {
+    "id": 1,
+    "name": "Dolo 650 Tab",
+    "generic": "Paracetamol",
+    "dosage": "650mg"
+  },
+  {
+    "id": 2,
+    "name": "TRULOOP TL2215",
+    "generic": "ENDOLOOP",
+    "dosage": "500mg"
+  },
+  {
+    "id": 3,
+    "name": "DOLOPAR TABLET",
+    "generic": "Paracetamol",
+    "dosage": "500mg"
+  },
+  {
+    "id": 4,
+    "name": "Crocin 650",
+    "generic": "Paracetamol",
+    "dosage": "650mg"
+  },
+  {
+    "id": 5,
+    "name": "Aspirin 75mg",
+    "generic": "Acetylsalicylic acid",
+    "dosage": "75mg"
+  },
+  {
+    "id": 6,
+    "name": "Ibuprofen 400",
+    "generic": "Ibuprofen",
+    "dosage": "400mg"
+  },
+  {
+    "id": 7,
+    "name": "Amoxicillin 500",
+    "generic": "Amoxicillin",
+    "dosage": "500mg"
+  },
+  {
+    "id": 8,
+    "name": "Metformin 500",
+    "generic": "Metformin",
+    "dosage": "500mg"
+  }
+];
+
+export default _default;
