@@ -123,13 +123,14 @@ const TrendLinechart: React.FC<TrendLinechartProps> = ({
     title = 'Annual Patient Trends',
     subtitle = 'Aug 2025 - Dec 2026 Volume & Projections',
     dateRangeBadge = 'Aug 25 - Dec 26',
-    data = defaultData,
+    data: dataProp = defaultData,
     xAxisKey = 'month',
     metricsConfig = defaultMetricsConfig,
     referenceLineValue = 200,
     referenceLineLabel = 'Beds (200)',
     daysInMonthMap = defaultDaysInMonthMap
 }) => {
+    const data = dataProp ?? defaultData;
     const [activeMetrics, setActiveMetrics] = useState<Record<string, boolean>>(() => {
         const initial: Record<string, boolean> = {};
         Object.keys(metricsConfig).forEach(key => initial[key] = true);
