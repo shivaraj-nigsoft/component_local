@@ -30,7 +30,7 @@ const LineChart: React.FC<LineChartProps> = ({
   const [tooltip, setTooltip] = useState<{ x: number; y: number; label: string; value: number } | null>(null);
   const paddingTop = 20;
   const paddingBottom = 15;
-  const paddingSide = 50;
+  const paddingSide = 55;
   const svgWidth = width || 600;
   const chartWidth = svgWidth - paddingSide * 2;
   const chartHeight = height - paddingTop - paddingBottom;
@@ -75,20 +75,33 @@ const LineChart: React.FC<LineChartProps> = ({
             <g>
               {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => {
                 const y = paddingTop + chartHeight * (1 - ratio);
-                return <line key={i} x1={paddingSide} y1={y} x2={svgWidth - paddingSide} y2={y} stroke="#e0e0e0" strokeWidth="1" />;
+                const yValue = minValue + valueRange * ratio;
+                return (
+                  <g key={i}>
+                    <line x1={paddingSide} y1={y} x2={svgWidth - paddingSide} y2={y} stroke="#e0e0e0" strokeWidth="1" />
+                    <text x={paddingSide - 6} y={y + 4} textAnchor="end" fontSize={fs(9)} fill="#888">
+                      {yValue % 1 === 0 ? yValue.toLocaleString('en-IN') : yValue.toFixed(1)}
+                    </text>
+                  </g>
+                );
               })}
             </g>
           )}
           <path d={pathData} fill="none" stroke={defaultColor} strokeWidth={strokeWidth} />
           {showDots && points.map((point, index) => (
-            <circle
-              key={index} cx={point.x} cy={point.y} r="4"
-              fill={point.color || defaultColor}
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={e => setTooltip({ x: e.clientX, y: e.clientY, label: point.label, value: point.value })}
-              onMouseMove={e => setTooltip(t => t ? { ...t, x: e.clientX, y: e.clientY } : null)}
-              onMouseLeave={() => setTooltip(null)}
-            />
+            <g key={index}>
+              <circle
+                cx={point.x} cy={point.y} r="4"
+                fill={point.color || defaultColor}
+                style={{ cursor: 'pointer' }}
+                onMouseEnter={e => setTooltip({ x: e.clientX, y: e.clientY, label: point.label, value: point.value })}
+                onMouseMove={e => setTooltip(t => t ? { ...t, x: e.clientX, y: e.clientY } : null)}
+                onMouseLeave={() => setTooltip(null)}
+              />
+              <text x={point.x} y={point.y - 8} textAnchor="middle" fontSize={fs(9)} fill="#444" pointerEvents="none">
+                {point.value.toLocaleString('en-IN')}
+              </text>
+            </g>
           ))}
           {points.map((point, index) => (
             needsRotation ? (
