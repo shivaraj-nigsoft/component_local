@@ -41,7 +41,6 @@ function generateShades(baseColor: string, data: DataPoint[]): string[] {
 const PieChart: React.FC<PieChartProps> = ({
   data,
   showLegend = true,
-  showPercentages = true,
   title,
   baseColor
 }) => {
@@ -117,7 +116,7 @@ const PieChart: React.FC<PieChartProps> = ({
               <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{ width: '16px', height: '16px', backgroundColor: slice.color, borderRadius: '4px', flexShrink: 0 }} />
                 <span style={{ fontSize: fs(14), color: '#333' }}>
-                  {slice.label}{showPercentages && ` (${slice.percentage.toFixed(1)}%)`}
+                  {slice.label}: {slice.value.toLocaleString('en-IN')}
                 </span>
               </div>
             ))}
@@ -133,7 +132,7 @@ const PieChart: React.FC<PieChartProps> = ({
         }}>
           <div style={{ fontWeight: 'bold' }}>{tooltip.label}</div>
           <div>Value: {tooltip.value.toLocaleString('en-IN')}</div>
-          {/* <div>Share: {tooltip.percentage.toFixed(1)}%</div> */}
+          <div>Percentage: {tooltip.percentage.toFixed(1)}%</div>
         </div>
       )}
     </div>

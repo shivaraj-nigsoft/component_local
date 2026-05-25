@@ -36,8 +36,25 @@ const LineChart: React.FC<LineChartProps> = ({
   const chartHeight = height - paddingTop - paddingBottom;
 
   const maxValue = Math.max(...data.map(d => d.value));
-  const minValue = Math.min(...data.map(d => d.value));
-  const valueRange = maxValue - minValue || 1;
+  
+  // Calculate nice round numbers for y-axis
+  const getYAxisTicks = (max: number) => {
+    const magnitude = Math.pow(10, Math.floor(Math.log10(max)));
+    const normalized = max / magnitude;
+    let step;
+    if (normalized <= 1) step = 0.2 * magnitude;
+    else if (normalized <= 2) step = 0.5 * magnitude;
+    else if (normalized <= 5) step = magnitude;
+    else step = 2 * magnitude;
+    
+    const ticks = [];
+    for (let i = 0; i <= Math.ceil(max / step); i++) {
+      ticks.push(i * step);
+    }
+    return ticks;
+  };
+  
+  const yTicks = getYAxisTicks(maxValue);
 
   const sectionWidth = chartWidth / (data.length - 1 || 1);
   const estCharWidth = 10 * scale * 0.6;
@@ -47,7 +64,7 @@ const LineChart: React.FC<LineChartProps> = ({
 
   const points = data.map((point, index) => {
     const x = paddingSide + (chartWidth / (data.length - 1)) * index;
-    const y = paddingTop + chartHeight - ((point.value - minValue) / valueRange) * chartHeight;
+    const y = paddingTop + chartHeight - (point.value / (yTicks[yTicks.length - 1] || 1)) * chartHeight;
     return { x, y, ...point };
   });
 
@@ -73,14 +90,13 @@ const LineChart: React.FC<LineChartProps> = ({
         <svg width={svgWidth} height={height + paddingBottom + (needsRotation ? rotatedLabelHeight - 20 : 0)}>
           {showGrid && (
             <g>
-              {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => {
-                const y = paddingTop + chartHeight * (1 - ratio);
-                const yValue = minValue + valueRange * ratio;
+              {yTicks.map((tickValue, i) => {
+                const y = paddingTop + chartHeight - (tickValue / (yTicks[yTicks.length - 1] || 1)) * chartHeight;
                 return (
                   <g key={i}>
                     <line x1={paddingSide} y1={y} x2={svgWidth - paddingSide} y2={y} stroke="#e0e0e0" strokeWidth="1" />
                     <text x={paddingSide - 6} y={y + 4} textAnchor="end" fontSize={fs(9)} fill="#888">
-                      {yValue % 1 === 0 ? yValue.toLocaleString('en-IN') : yValue.toFixed(1)}
+                      {tickValue.toLocaleString('en-IN')}
                     </text>
                   </g>
                 );
