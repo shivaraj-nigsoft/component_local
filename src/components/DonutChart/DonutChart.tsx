@@ -208,10 +208,10 @@ const DonutChart: React.FC<DonutChartProps> = ({ data, title, total, baseColor }
                 points={`${s.lineStartX},${s.lineStartY} ${s.ellipseX},${s.labelY} ${s.lx2},${s.labelY}`}
                 stroke={s.color} strokeWidth="1.2" fill="none" strokeLinejoin="round"
               />
-              {/* label: name + percentage */}
+              {/* label: name + value */}
               <text x={s.textX} y={s.labelY} textAnchor={s.textAnchor} dominantBaseline="middle"
                 fill="#2c3e50" fontSize={fs(11)} fontWeight="600">
-                {s.label}: {s.pct.toFixed(1)}%
+                {s.label}: {s.value.toLocaleString('en-IN')}
               </text>
             </g>
           ))}
@@ -226,6 +226,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ data, title, total, baseColor }
           }}>
             <div style={{ fontWeight: 'bold' }}>{tooltip.label}</div>
             <div>Value: {tooltip.value.toLocaleString('en-IN')}</div>
+            <div>Percentage: {tooltip.pct.toFixed(1)}%</div>
           </div>
         )}
       </div>
