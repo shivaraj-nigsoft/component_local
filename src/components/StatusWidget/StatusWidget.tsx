@@ -26,17 +26,22 @@ const StatusWidget: React.FC<StatusWidgetProps> = ({
     <div ref={ref} style={{
       backgroundColor: '#ffffff',
       borderRadius: '16px',
-      padding: '0',
+      padding: '24px',
       fontFamily: 'Arial, sans-serif',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+      position: 'relative',
       width: '100%',
-      boxSizing: 'border-box',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+      boxSizing: 'border-box'
     }}>
     
 
       <div style={{ padding: '24px' }}>
        
-       <h4 style={{color:'#003357'}}>{title}</h4>
+      {title && (
+        <h6 style={{ margin: '0 0 20px 0', fontSize: fs(12), fontWeight: 'bold', color: '#003357' }}>
+          {title}
+        </h6>
+      )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {paymentMethods.map((method, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
