@@ -29,5 +29,6 @@ export * from "./components/DonutChart";
 export * from "./components/StatGrid";
 export * from "./components/TrendLinechart";
 export * from "./components/TrendBarChart";
+export * from "./components/MultiChart";
 
 export { useContainerSize } from "./components/useContainerSize";
