@@ -71,7 +71,7 @@ export interface TrendLinechartProps {
     daysInMonthMap?: Record<string, number>;
 }
 
-const CustomTooltip = ({ active, payload, label, metricsConfig, daysInMonthMap }: any) => {
+const CustomTooltip = ({ active, payload, label, metricsConfig }: any) => {
     if (active && payload && payload.length) {
         const filteredPayload = payload.filter((entry: any) => {
             if (entry.dataKey.endsWith('_Proj')) {
@@ -92,10 +92,10 @@ const CustomTooltip = ({ active, payload, label, metricsConfig, daysInMonthMap }
                         
                         // Calculate Daily Average if map is provided
                         let avgLabel = null;
-                        if (daysInMonthMap && daysInMonthMap[label]) {
-                            const dailyAvg = Math.ceil(entry.value / daysInMonthMap[label]);
-                            avgLabel = <span style={{ color: '#64748b', fontWeight: 400, fontSize: '10px' }}>(DA - {dailyAvg})</span>;
-                        }
+                        // if (daysInMonthMap && daysInMonthMap[label]) {
+                        //     const dailyAvg = Math.ceil(entry.value / daysInMonthMap[label]);
+                        //     avgLabel = <span style={{ color: '#64748b', fontWeight: 400, fontSize: '10px' }}>(DA - {dailyAvg})</span>;
+                        // }
                         
                         return (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>

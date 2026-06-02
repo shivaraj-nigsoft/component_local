@@ -70,7 +70,7 @@ export interface TrendBarChartProps {
     daysInMonthMap?: Record<string, number>;
 }
 
-const CustomTooltip = ({ active, payload, label, metricsConfig, daysInMonthMap }: any) => {
+const CustomTooltip = ({ active, payload, label, metricsConfig }: any) => {
     if (!active || !payload?.length) return null;
 
     const filteredPayload = payload.filter((entry: any) => {
@@ -90,10 +90,10 @@ const CustomTooltip = ({ active, payload, label, metricsConfig, daysInMonthMap }
                     const baseKey = isProj ? entry.dataKey.replace('_Proj', '') : entry.dataKey;
                     const config = metricsConfig[baseKey] || { label: baseKey, shortLabel: baseKey, color: entry.color };
                     let avgLabel = null;
-                    if (daysInMonthMap?.[label]) {
-                        const dailyAvg = Math.ceil(entry.value / daysInMonthMap[label]);
-                        avgLabel = <span style={{ color: '#64748b', fontWeight: 400, fontSize: '10px' }}>(DA - {dailyAvg})</span>;
-                    }
+                    // if (daysInMonthMap?.[label]) {
+                    //     const dailyAvg = Math.ceil(entry.value / daysInMonthMap[label]);
+                        // avgLabel = <span style={{ color: '#64748b', fontWeight: 400, fontSize: '10px' }}>(DA - {dailyAvg})</span>;
+                    // }
                     return (
                         <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
