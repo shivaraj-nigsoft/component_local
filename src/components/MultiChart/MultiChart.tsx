@@ -64,7 +64,6 @@ const CHART_TYPES: { type: ChartType; label: string; icon: React.ReactNode }[] =
 
 // ── Component ────────────────────────────────────────────────────────────────
 const MultiChart: React.FC<MultiChartProps> = ({
-    title = 'Chart',
     data = [],
     apis = [],
     activeEndpoint,
