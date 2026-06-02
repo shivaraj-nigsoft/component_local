@@ -65,9 +65,9 @@ const DonutChart: React.FC<DonutChartProps> = ({ data, title, total, baseColor }
   const [tooltip, setTooltip] = useState<{ x: number; y: number; label: string; value: number; pct: number } | null>(null);
 
   const containerW = width || 600;
-  const svgWidth = Math.max(280, Math.min(containerW, 500));
-  const labelMargin = 130;
-  const outerR = svgWidth / 2 - labelMargin;
+  const svgWidth = containerW;
+  const labelMargin = Math.max(160, containerW * 0.28);
+  const outerR = Math.min(containerW / 2 - labelMargin, 120);
   const innerR = outerR * 0.52;
   const elbowR = outerR + ELBOW_R_OFFSET;
 
