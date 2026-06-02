@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BarChart from '../BarChart/BarChart';
 import LineChart from '../LineChart/LineChart';
 import PieChart from '../PieChart/PieChart';
@@ -75,6 +75,12 @@ const MultiChart: React.FC<MultiChartProps> = ({
     baseColor,
 }) => {
     const [chartType, setChartType] = useState<ChartType>(defaultChart);
+
+    useEffect(() => {
+        if (!activeEndpoint && apis.length > 0) {
+            onEndpointSelect?.(apis[0].endpoint);
+        }
+    }, []);
 
     const pill = (active: boolean): React.CSSProperties => ({
         display: 'flex', alignItems: 'center', gap: '5px',

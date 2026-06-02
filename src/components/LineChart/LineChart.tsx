@@ -30,14 +30,10 @@ const LineChart: React.FC<LineChartProps> = ({
   const [tooltip, setTooltip] = useState<{ x: number; y: number; label: string; value: number } | null>(null);
   const paddingTop = 20;
   const paddingBottom = 15;
-  const paddingSide = 55;
   const svgWidth = width || 600;
-  const chartWidth = svgWidth - paddingSide * 2;
-  const chartHeight = height - paddingTop - paddingBottom;
 
   const maxValue = Math.max(...data.map(d => d.value));
-  
-  // Calculate nice round numbers for y-axis
+
   const getYAxisTicks = (max: number) => {
     const magnitude = Math.pow(10, Math.floor(Math.log10(max)));
     const normalized = max / magnitude;
@@ -46,15 +42,16 @@ const LineChart: React.FC<LineChartProps> = ({
     else if (normalized <= 2) step = 0.5 * magnitude;
     else if (normalized <= 5) step = magnitude;
     else step = 2 * magnitude;
-    
     const ticks = [];
-    for (let i = 0; i <= Math.ceil(max / step); i++) {
-      ticks.push(i * step);
-    }
+    for (let i = 0; i <= Math.ceil(max / step); i++) ticks.push(i * step);
     return ticks;
   };
-  
+
   const yTicks = getYAxisTicks(maxValue);
+  const longestTick = Math.max(...yTicks.map(t => t.toLocaleString('en-IN').length));
+  const paddingSide = Math.max(65, longestTick * 9 + 16);
+  const chartWidth = svgWidth - paddingSide * 2;
+  const chartHeight = height - paddingTop - paddingBottom;
 
   const sectionWidth = chartWidth / (data.length - 1 || 1);
   const estCharWidth = 10 * scale * 0.6;
@@ -114,7 +111,12 @@ const LineChart: React.FC<LineChartProps> = ({
                 onMouseMove={e => setTooltip(t => t ? { ...t, x: e.clientX, y: e.clientY } : null)}
                 onMouseLeave={() => setTooltip(null)}
               />
-              <text x={point.x} y={point.y - 8} textAnchor="middle" fontSize={fs(9)} fill="#444" pointerEvents="none">
+              <text
+                x={index === 0 ? point.x + 4 : index === points.length - 1 ? point.x - 4 : point.x}
+                y={point.y - 8}
+                textAnchor={index === 0 ? 'start' : index === points.length - 1 ? 'end' : 'middle'}
+                fontSize={fs(9)} fill="#444" pointerEvents="none"
+              >
                 {point.value.toLocaleString('en-IN')}
               </text>
             </g>

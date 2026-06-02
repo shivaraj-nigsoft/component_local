@@ -276,6 +276,23 @@ const TrendBarChart: React.FC<TrendBarChartProps> = ({
                                             </tr>
                                         );
                                     })}
+                                    <tr style={{ borderTop: '2px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 700 }}>
+                                        <td style={{ padding: '4px 8px', color: '#0f172a', borderRight: '1px solid #e2e8f0', position: 'sticky', left: 0, backgroundColor: '#f8fafc', zIndex: 10 }}>
+                                            Total
+                                        </td>
+                                        {data.map((row, idx) => {
+                                            const total = Object.keys(metricsConfig).reduce((sum, key) => {
+                                                if (!activeMetrics[key]) return sum;
+                                                return sum + (Number(row[key] ?? row[`${key}_Proj`] ?? 0));
+                                            }, 0);
+                                            const isProjected = Object.keys(metricsConfig).every(k => !row.hasOwnProperty(k) && row.hasOwnProperty(`${k}_Proj`));
+                                            return (
+                                                <td key={idx} style={{ padding: '4px 2px', textAlign: 'center', color: isProjected ? '#64748b' : '#0f172a' }}>
+                                                    {total || '-'}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
