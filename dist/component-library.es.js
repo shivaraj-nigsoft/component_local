@@ -25432,42 +25432,33 @@ const RN = ({ size: e = 24, className: t = "", style: r = {} }) => /* @__PURE__ 
   "Oct 26": 31,
   "Nov 26": 30,
   "Dec 26": 31
-}, FN = ({ active: e, payload: t, label: r, metricsConfig: n, daysInMonthMap: i }) => {
+}, FN = ({ active: e, payload: t, label: r, metricsConfig: n }) => {
   if (e && t && t.length) {
-    const o = t.filter((a) => {
-      if (a.dataKey.endsWith("_Proj")) {
-        const l = a.dataKey.replace("_Proj", "");
-        if (t.some((c) => c.dataKey === l)) return !1;
+    const i = t.filter((o) => {
+      if (o.dataKey.endsWith("_Proj")) {
+        const a = o.dataKey.replace("_Proj", "");
+        if (t.some((l) => l.dataKey === a)) return !1;
       }
       return !0;
     });
     return /* @__PURE__ */ f.jsxs("div", { style: { backgroundColor: "#ffffff", border: "1px solid #e2e8f0", padding: "12px", borderRadius: "8px", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)", zIndex: 50, position: "relative", color: "#0f172a" }, children: [
       /* @__PURE__ */ f.jsx("p", { style: { margin: "0 0 8px 0", fontWeight: 600, borderBottom: "1px solid #f1f5f9", paddingBottom: "4px", fontSize: "14px", color: "#1e293b" }, children: r }),
-      /* @__PURE__ */ f.jsx("div", { style: { display: "flex", flexDirection: "column", gap: "6px" }, children: o.map((a, l) => {
-        const c = a.dataKey.endsWith("_Proj"), s = c ? a.dataKey.replace("_Proj", "") : a.dataKey, u = n[s] || { label: s, color: a.color };
-        let d = null;
-        if (i && i[r]) {
-          const p = Math.ceil(a.value / i[r]);
-          d = /* @__PURE__ */ f.jsxs("span", { style: { color: "#64748b", fontWeight: 400, fontSize: "10px" }, children: [
-            "(DA - ",
-            p,
-            ")"
-          ] });
-        }
+      /* @__PURE__ */ f.jsx("div", { style: { display: "flex", flexDirection: "column", gap: "6px" }, children: i.map((o, a) => {
+        const l = o.dataKey.endsWith("_Proj"), c = l ? o.dataKey.replace("_Proj", "") : o.dataKey, s = n[c] || { label: c, color: o.color };
         return /* @__PURE__ */ f.jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px" }, children: [
           /* @__PURE__ */ f.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "8px" }, children: [
-            /* @__PURE__ */ f.jsx("div", { style: { width: "10px", height: "10px", borderRadius: "9999px", backgroundColor: a.color } }),
+            /* @__PURE__ */ f.jsx("div", { style: { width: "10px", height: "10px", borderRadius: "9999px", backgroundColor: o.color } }),
             /* @__PURE__ */ f.jsxs("span", { style: { color: "#475569", fontSize: "12px", fontWeight: 500 }, children: [
-              u.label,
+              s.label,
               " ",
-              c && /* @__PURE__ */ f.jsx("span", { style: { color: "#94a3b8", fontSize: "10px", fontStyle: "italic", marginLeft: "2px" }, children: "(Projected)" })
+              l && /* @__PURE__ */ f.jsx("span", { style: { color: "#94a3b8", fontSize: "10px", fontStyle: "italic", marginLeft: "2px" }, children: "(Projected)" })
             ] })
           ] }),
           /* @__PURE__ */ f.jsxs("span", { style: { color: "#0f172a", fontWeight: 700, fontSize: "14px", display: "flex", alignItems: "baseline", gap: "6px" }, children: [
-            a.value,
-            d
+            o.value,
+            null
           ] })
-        ] }, l);
+        ] }, a);
       }) })
     ] });
   }
@@ -25703,43 +25694,34 @@ const RN = ({ size: e = 24, className: t = "", style: r = {} }) => /* @__PURE__ 
   "Oct 26": 31,
   "Nov 26": 30,
   "Dec 26": 31
-}, XN = ({ active: e, payload: t, label: r, metricsConfig: n, daysInMonthMap: i }) => {
+}, XN = ({ active: e, payload: t, label: r, metricsConfig: n }) => {
   if (!e || !t?.length) return null;
-  const o = t.filter((a) => {
-    if (a.dataKey.endsWith("_Proj")) {
-      const l = a.dataKey.replace("_Proj", "");
-      if (t.some((c) => c.dataKey === l)) return !1;
+  const i = t.filter((o) => {
+    if (o.dataKey.endsWith("_Proj")) {
+      const a = o.dataKey.replace("_Proj", "");
+      if (t.some((l) => l.dataKey === a)) return !1;
     }
     return !0;
   });
   return /* @__PURE__ */ f.jsxs("div", { style: { backgroundColor: "#ffffff", border: "1px solid #e2e8f0", padding: "12px", borderRadius: "8px", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", zIndex: 50, position: "relative", color: "#0f172a" }, children: [
     /* @__PURE__ */ f.jsx("p", { style: { margin: "0 0 8px 0", fontWeight: 600, borderBottom: "1px solid #f1f5f9", paddingBottom: "4px", fontSize: "14px", color: "#1e293b" }, children: r }),
-    /* @__PURE__ */ f.jsx("div", { style: { display: "flex", flexDirection: "column", gap: "6px" }, children: o.map((a, l) => {
-      const c = a.dataKey.endsWith("_Proj"), s = c ? a.dataKey.replace("_Proj", "") : a.dataKey, u = n[s] || { label: s, color: a.color };
-      let d = null;
-      if (i?.[r]) {
-        const p = Math.ceil(a.value / i[r]);
-        d = /* @__PURE__ */ f.jsxs("span", { style: { color: "#64748b", fontWeight: 400, fontSize: "10px" }, children: [
-          "(DA - ",
-          p,
-          ")"
-        ] });
-      }
+    /* @__PURE__ */ f.jsx("div", { style: { display: "flex", flexDirection: "column", gap: "6px" }, children: i.map((o, a) => {
+      const l = o.dataKey.endsWith("_Proj"), c = l ? o.dataKey.replace("_Proj", "") : o.dataKey, s = n[c] || { label: c, color: o.color };
       return /* @__PURE__ */ f.jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px" }, children: [
         /* @__PURE__ */ f.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "8px" }, children: [
-          /* @__PURE__ */ f.jsx("div", { style: { width: "10px", height: "10px", borderRadius: "9999px", backgroundColor: a.color } }),
+          /* @__PURE__ */ f.jsx("div", { style: { width: "10px", height: "10px", borderRadius: "9999px", backgroundColor: o.color } }),
           /* @__PURE__ */ f.jsxs("span", { style: { color: "#475569", fontSize: "12px", fontWeight: 500 }, children: [
-            u.label,
+            s.label,
             " ",
-            c && /* @__PURE__ */ f.jsx("span", { style: { color: "#94a3b8", fontSize: "10px", fontStyle: "italic", marginLeft: "2px" }, children: "(Projected)" })
+            l && /* @__PURE__ */ f.jsx("span", { style: { color: "#94a3b8", fontSize: "10px", fontStyle: "italic", marginLeft: "2px" }, children: "(Projected)" })
           ] })
         ] }),
         /* @__PURE__ */ f.jsxs("span", { style: { color: "#0f172a", fontWeight: 700, fontSize: "14px", display: "flex", alignItems: "baseline", gap: "6px" }, children: [
-          a.value,
+          o.value,
           " ",
-          d
+          null
         ] })
-      ] }, l);
+      ] }, a);
     }) })
   ] });
 }, ZN = (e) => {
