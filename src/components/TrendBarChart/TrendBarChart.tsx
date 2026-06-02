@@ -165,9 +165,9 @@ const TrendBarChart: React.FC<TrendBarChartProps> = ({
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px',
                                         borderRadius: '9999px', fontSize: '12px', fontWeight: 500, cursor: 'pointer', border: '1px solid',
-                                        backgroundColor: isActive ? '#f1f5f9' : 'transparent',
-                                        color: isActive ? '#0f172a' : '#64748b',
-                                        borderColor: isActive ? '#cbd5e1' : '#e2e8f0',
+                                        backgroundColor: isActive ? `${config.color}18` : 'transparent',
+                                        color: isActive ? config.color : '#64748b',
+                                        borderColor: isActive ? config.color : '#e2e8f0',
                                         transition: 'all 0.2s ease-out',
                                     }}
                                 >
