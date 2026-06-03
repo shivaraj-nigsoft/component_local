@@ -84,23 +84,25 @@ const MultiChart: React.FC<MultiChartProps> = ({
 
     const pill = (active: boolean): React.CSSProperties => ({
         display: 'flex', alignItems: 'center', gap: '5px',
-        padding: '4px 10px', borderRadius: '9999px', fontSize: '11px',
-        fontWeight: 500, cursor: 'pointer', border: '1px solid', fontFamily: 'inherit',
-        backgroundColor: active ? '#f1f5f9' : 'transparent',
-        color: active ? '#3b82f6' : '#64748b',
-        borderColor: active ? '#3b82f6' : '#e2e8f0',
-        transition: 'all 0.2s ease-out',
+        padding: '5px 11px', borderRadius: '8px', fontSize: '11px',
+        fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
+        border: active ? '1.5px solid #3b82f6' : '1.5px solid #e2e8f0',
+        backgroundColor: active ? '#eff6ff' : '#ffffff',
+        color: active ? '#2563eb' : '#94a3b8',
+        boxShadow: active ? '0 1px 4px rgba(59,130,246,0.15)' : 'none',
+        transition: 'all 0.18s ease-out',
     });
 
     const endpointPill = (active: boolean): React.CSSProperties => ({
-        display: 'flex', alignItems: 'center', gap: '4px',
-        padding: '3px 9px', borderRadius: '9999px', fontSize: '10px',
-        fontWeight: 600, cursor: 'pointer', border: '1px solid', fontFamily: 'inherit',
-        backgroundColor: active ? '#4f46e5' : '#f8fafc',
+        display: 'flex', alignItems: 'center',
+        padding: '4px 12px', borderRadius: '6px', fontSize: '11px',
+        fontWeight: 600, cursor: 'pointer', border: 'none', fontFamily: 'inherit',
+        background: active ? 'linear-gradient(135deg,#6366f1,#4f46e5)' : '#f1f5f9',
         color: active ? '#ffffff' : '#64748b',
-        borderColor: active ? '#4f46e5' : '#e2e8f0',
-        transition: 'all 0.2s ease-out',
+        boxShadow: active ? '0 2px 6px rgba(99,102,241,0.35)' : 'none',
+        transition: 'all 0.18s ease-out',
         whiteSpace: 'nowrap' as const,
+        letterSpacing: active ? '0.01em' : 'normal',
     });
 
     const renderChart = () => {
@@ -129,28 +131,29 @@ const MultiChart: React.FC<MultiChartProps> = ({
 
     return (
         <div style={{ width: '100%', fontFamily: 'sans-serif', boxSizing: 'border-box' }}>
-            {/* ── Endpoint tabs ── */}
-            {apis.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '10px' }}>
-                    {apis.map((api) => (
-                        <button
-                            key={api.endpoint}
-                            onClick={() => onEndpointSelect?.(api.endpoint)}
-                            style={endpointPill(activeEndpoint === api.endpoint)}
-                        >
-                            {api.label}
+{/* ── Single toolbar row: API buttons + chart toggles ── */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                    {CHART_TYPES.map(({ type, label, icon }) => (
+                        <button key={type} onClick={() => setChartType(type)} style={pill(chartType === type)}>
+                            <span style={{ display: 'flex', opacity: chartType === type ? 1 : 0.5 }}>{icon}</span>
+                            {label}
                         </button>
                     ))}
                 </div>
-            )}
-            {/* ── Chart type toggles ── */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
-                {CHART_TYPES.map(({ type, label, icon }) => (
-                    <button key={type} onClick={() => setChartType(type)} style={pill(chartType === type)}>
-                        <span style={{ display: 'flex', opacity: chartType === type ? 1 : 0.45 }}>{icon}</span>
-                        {label}
-                    </button>
-                ))}
+                {apis.length > 0 && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                        {apis.map((api) => (
+                            <button
+                                key={api.endpoint}
+                                onClick={() => onEndpointSelect?.(api.endpoint)}
+                                style={endpointPill(activeEndpoint === api.endpoint)}
+                            >
+                                {api.label}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
             {/* ── Chart area ── */}
             <div style={{ width: '100%', boxSizing: 'border-box' }}>
