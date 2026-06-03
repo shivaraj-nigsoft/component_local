@@ -47,15 +47,14 @@ const PieChart: React.FC<PieChartProps> = ({
   const { ref, width, fs } = useContainerSize();
   const [tooltip, setTooltip] = useState<{ x: number; y: number; label: string; value: number; percentage: number } | null>(null);
 
-  const legendWidth = showLegend ? 160 : 0;
-  const availableWidth = (width || 400) - legendWidth - 40;
-  const size = Math.max(100, Math.min(availableWidth, 400));
+  const containerW = width || 400;
+  const size = Math.max(100, Math.min(containerW, 400));
+  const centerX = containerW / 2;
+  const centerY = size / 2;
+  const radius = size / 2 - 20;
 
   const shades = baseColor ? generateShades(baseColor, data) : null;
   const total = data.reduce((sum, d) => sum + d.value, 0);
-  const centerX = size / 2;
-  const centerY = size / 2;
-  const radius = size / 2 - 20;
 
   let currentAngle = -90;
   const slices = data.map(point => {
@@ -92,9 +91,9 @@ const PieChart: React.FC<PieChartProps> = ({
           {title}
         </h6>
       )}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '40px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
         {size > 0 && (
-          <svg width={size} height={size}>
+          <svg width={containerW} height={size} style={{ display: 'block' }}>
             {slices.map((slice, index) => (
               <path
                 key={index}
@@ -111,11 +110,11 @@ const PieChart: React.FC<PieChartProps> = ({
           </svg>
         )}
         {showLegend && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px 24px' }}>
             {slices.map((slice, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '16px', height: '16px', backgroundColor: slice.color, borderRadius: '4px', flexShrink: 0 }} />
-                <span style={{ fontSize: fs(14), color: '#333' }}>
+              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '12px', height: '12px', backgroundColor: slice.color, borderRadius: '3px', flexShrink: 0 }} />
+                <span style={{ fontSize: fs(12), color: '#333' }}>
                   {slice.label}: {slice.value.toLocaleString('en-IN')}
                 </span>
               </div>
