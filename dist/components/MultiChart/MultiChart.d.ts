@@ -21,7 +21,6 @@ export interface MultiChartProps {
     defaultChart?: ChartType;
     height?: number;
     defaultColor?: string;
-    baseColor?: string;
 }
 declare const MultiChart: React.FC<MultiChartProps>;
 export default MultiChart;
