@@ -52,7 +52,6 @@ export interface MultiChartProps {
     defaultChart?: ChartType;
     height?: number;
     defaultColor?: string;
-    baseColor?: string;
 }
 
 const CHART_TYPES: { type: ChartType; label: string; icon: React.ReactNode }[] = [
@@ -72,7 +71,6 @@ const MultiChart: React.FC<MultiChartProps> = ({
     defaultChart = 'bar',
     height = 220,
     defaultColor = '#003357',
-    baseColor,
 }) => {
     const [chartType, setChartType] = useState<ChartType>(defaultChart);
 
@@ -124,8 +122,8 @@ const MultiChart: React.FC<MultiChartProps> = ({
         switch (chartType) {
             case 'bar':   return <BarChart   data={data} height={height} defaultColor={defaultColor} />;
             case 'line':  return <LineChart  data={data} height={height} defaultColor={defaultColor} />;
-            case 'pie':   return <PieChart   data={data} baseColor={baseColor ?? defaultColor} />;
-            case 'donut': return <DonutChart data={data} baseColor={baseColor ?? defaultColor} />;
+            case 'pie':   return <PieChart   data={data} />;
+            case 'donut': return <DonutChart data={data} />;
         }
     };
 
