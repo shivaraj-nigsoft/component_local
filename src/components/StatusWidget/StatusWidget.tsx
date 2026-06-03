@@ -26,7 +26,7 @@ const StatusWidget: React.FC<StatusWidgetProps> = ({
     <div ref={ref} style={{
       backgroundColor: '#ffffff',
       borderRadius: '16px',
-      padding: '24px',
+      padding: '12px',
       fontFamily: 'Arial, sans-serif',
       boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
       position: 'relative',
@@ -35,7 +35,7 @@ const StatusWidget: React.FC<StatusWidgetProps> = ({
     }}>
     
 
-      <div style={{ padding: '24px' }}>
+      <div>
        
       {title && (
         <h6 style={{ margin: '0 0 20px 0', fontSize: fs(12), fontWeight: 'bold', color: '#003357' }}>
